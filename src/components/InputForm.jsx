@@ -70,6 +70,19 @@ export default function InputForm() {
 				<p>{restaurants.length} Restaurants gefunden.</p>
 			)}
 			{restaurants && <RestaurantFinder restaurants={restaurants} />}
+			{coordinates.lat && coordinates.lon && (
+				<p>
+					Das Restaurant, das du suchst, taucht hier nicht auf? Dann füge es
+					jetzt{' '}
+					<a
+						href={`https://www.openstreetmap.org/#map=16/${coordinates.lat}/${coordinates.lon}`}
+						target="_blank"
+					>
+						hier
+					</a>{' '}
+					hinzu.
+				</p>
+			)}
 		</form>
 	);
 }
