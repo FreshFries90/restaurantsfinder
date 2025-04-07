@@ -156,6 +156,7 @@ const cuisineTranslations = {
 	soul_food: 'Soul Food',
 	friture: 'Frittiertes',
 	swabian: 'Schwäbisch',
+	bowl: 'Bowl',
 	thuringian: 'Thüringisch',
 	'turkish breakfast': 'Türkisches Frühstück',
 	eastern_european: 'Osteuropäisch',

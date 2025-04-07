@@ -75,10 +75,6 @@ body {
 	line-height: var(--reduced-line-height);
 }
 
-main :where(p) {
-	max-inline-size: var(--max-text-length);
-}
-
 h1,
 .h1 {
 	font-size: var(--step-5);
