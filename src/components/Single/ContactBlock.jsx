@@ -4,13 +4,36 @@ export default function ContactBlock({ tags }) {
 			<h3>Kontaktdaten</h3>
 			<div className="details">
 				{tags['contact:facebook'] && (
-					<a href={tags['contact:facebook']} target="_blank">
-						<img alt="Facebook" src="src/images/icons/facebook.png"></img>
+					<a
+						href={
+							tags['contact:facebook'].startsWith('http')
+								? tags['contact:facebook']
+								: `https://facebook.com/${tags['contact:facebook'].replace(
+										/^@/,
+										''
+								  )}`
+						}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img alt="Facebook" src="src/images/icons/facebook.png" />
 					</a>
 				)}
+
 				{tags['contact:instagram'] && (
-					<a href={tags['contact:instagram']} target="_blank">
-						<img alt="Instagram" src="src/images/icons/instagram.png"></img>
+					<a
+						href={
+							tags['contact:instagram'].startsWith('http')
+								? tags['contact:instagram']
+								: `https://instagram.com/${tags['contact:instagram'].replace(
+										/^@/,
+										''
+								  )}`
+						}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img alt="Instagram" src="src/images/icons/instagram.png" />
 					</a>
 				)}
 				{tags['contact:tiktok'] && (
@@ -18,18 +41,22 @@ export default function ContactBlock({ tags }) {
 						<img alt="TikTok" src="src/images/icons/tiktok.png"></img>
 					</a>
 				)}
-				{tags['contact:phone'] && (
+				{tags['contact:phone'] ? (
 					<a
 						href={`tel:${tags['contact:phone'].replace(/\s+/g, '')}`}
 						target="_blank"
 					>
-						<img alt="Phone" src="src/images/icons/phone.png"></img>
+						<img alt="Phone" src="src/images/icons/phone.png" />
 					</a>
-				)}
-				{tags['phone'] && (
-					<a href={`tel:${tags['phone'].replace(/\s+/g, '')}`} target="_blank">
-						<img alt="Phone" src="src/images/icons/phone.png"></img>
-					</a>
+				) : (
+					tags['phone'] && (
+						<a
+							href={`tel:${tags['phone'].replace(/\s+/g, '')}`}
+							target="_blank"
+						>
+							<img alt="Phone" src="src/images/icons/phone.png" />
+						</a>
+					)
 				)}
 				{tags['fax'] && (
 					<a href={`tel:${tags['fax'].replace(/\s+/g, '')}`} target="_blank">
