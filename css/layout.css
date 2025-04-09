@@ -99,14 +99,18 @@ Hauptinhalt. */
 	height: 50px;
 }
 .details,
-.diet {
+.diet,
+.wheelchairicons {
 	display: flex;
 	justify-content: center; /* horizontal zentriert */
 	align-items: center; /* vertikal zentriert (falls nötig) */
 	gap: 10px; /* optionaler Abstand zwischen den Bildern */
 }
-
-.diet img {
+.diet {
+	margin-bottom: 10px;
+}
+.diet img,
+.wheelchair img {
 	width: 100px;
 	height: 100px;
 }
