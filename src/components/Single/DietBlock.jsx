@@ -3,6 +3,7 @@ export default function DietBlock({ tags }) {
 	const vegetarianValue = tags['diet:vegetarian'];
 	const kosherValue = tags['diet:kosher'];
 	const halalValue = tags['diet:halal'];
+	const fruitarianValue = tags['diet:fruitarian'];
 	return (
 		<div className="diet">
 			{veganValue && (
