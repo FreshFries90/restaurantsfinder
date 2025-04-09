@@ -6,7 +6,7 @@ import RestaurantFinder from './RestaurantFinder';
 export default function InputForm() {
 	const [address, setAddress] = useState('');
 	const [coordinates, setCoordinates] = useState(null);
-	const [radius, setRadius] = useState(5000); // Default 5 km
+	const [radius, setRadius] = useState(5000);
 	const handleGeocode = async (e) => {
 		e.preventDefault();
 		if (!address) return;
@@ -66,11 +66,16 @@ export default function InputForm() {
 
 			<button type="submit">Suchen</button>
 
-			{restaurants && restaurants.length >= 1 && (
-				<p>{restaurants.length} Restaurants gefunden.</p>
+			{coordinates?.lat &&
+				coordinates?.lon &&
+				restaurants &&
+				restaurants.length >= 1 && (
+					<p>{restaurants.length} Restaurants gefunden.</p>
+				)}
+			{coordinates?.lat && coordinates?.lon && restaurants && (
+				<RestaurantFinder restaurants={restaurants} />
 			)}
-			{restaurants && <RestaurantFinder restaurants={restaurants} />}
-			{coordinates.lat && coordinates.lon && (
+			{coordinates?.lat && coordinates?.lon && (
 				<p>
 					Das Restaurant, das du suchst, taucht hier nicht auf? Dann füge es
 					jetzt{' '}

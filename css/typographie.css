@@ -68,7 +68,6 @@ body {
 	letter-spacing: -0.02em;
 	color: var(--heading-color);
 	font-family: var(--heading-font);
-	max-width: var(--max-heading-length);
 }
 
 :where(:--headings, button, input, label, legend, summary) {
