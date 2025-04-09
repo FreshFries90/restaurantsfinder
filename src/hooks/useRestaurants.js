@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import axios from 'redaxios';
 
-export default function useRestaurants(longitude, latitude, radius) {
+export default function useRestaurants(longitude, latitude, radius, cuisine) {
 	const [restaurants, setRestaurants] = useState([]);
 
 	useEffect(() => {
 		if (!longitude || !latitude || !radius) return;
+		const cuisineFilter = cuisine ? `["cuisine"="${cuisine}"]` : '';
 
 		const query = `
 			[out:json][timeout:25];
 				(
-					node["amenity"="restaurant"](around:${radius},${latitude},${longitude});
-					way["amenity"="restaurant"](around:${radius},${latitude},${longitude});
-					relation["amenity"="restaurant"](around:${radius},${latitude},${longitude});
+					node["amenity"="restaurant"]${cuisineFilter}(around:${radius},${latitude},${longitude});
+					way["amenity"="restaurant"]${cuisineFilter}(around:${radius},${latitude},${longitude});
+					relation["amenity"="restaurant"]${cuisineFilter}(around:${radius},${latitude},${longitude});
 				);
 			out center tags;
 		`;
@@ -38,7 +39,7 @@ export default function useRestaurants(longitude, latitude, radius) {
 		};
 
 		fetchRestaurants();
-	}, [longitude, latitude, radius]);
+	}, [longitude, latitude, radius, cuisine]);
 
 	return restaurants;
 }
