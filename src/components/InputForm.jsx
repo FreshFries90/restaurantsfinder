@@ -56,7 +56,7 @@ export default function InputForm() {
 		}
 	}, [address]);
 
-	const restaurants = useRestaurants(
+	const { restaurants, loading } = useRestaurants(
 		coordinates?.lon,
 		coordinates?.lat,
 		radius,
@@ -112,15 +112,14 @@ export default function InputForm() {
 				setKosher={setKosher}
 			/>
 
-			<button type="submit">Suchen</button>
-
-			{coordinates?.lat && coordinates?.lon && restaurants && (
+			{loading && <div className="spinner">🔄 Wird geladen...</div>}
+			{coordinates?.lat && coordinates?.lon && restaurants && !loading && (
 				<>
 					<p>{restaurants.length} Restaurants gefunden.</p>
 					<RestaurantFinder restaurants={restaurants} />
 				</>
 			)}
-			{coordinates?.lat && coordinates?.lon && (
+			{coordinates?.lat && coordinates?.lon && !loading && (
 				<p>
 					Das Restaurant, das du suchst, taucht hier nicht auf? Dann füge es
 					jetzt{' '}

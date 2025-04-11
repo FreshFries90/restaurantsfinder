@@ -14,6 +14,7 @@ export default function useRestaurants(
 	wheelchair
 ) {
 	const [restaurants, setRestaurants] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		setRestaurants([]);
@@ -50,6 +51,7 @@ export default function useRestaurants(
 		`;
 
 		const fetchRestaurants = async () => {
+			setLoading(true);
 			try {
 				const response = await axios.post(
 					'https://overpass-api.de/api/interpreter',
@@ -65,6 +67,8 @@ export default function useRestaurants(
 				setRestaurants(filtered);
 			} catch (error) {
 				console.error('Fehler beim Laden der Restaurants:', error);
+			} finally {
+				setLoading(false);
 			}
 		};
 
@@ -82,5 +86,5 @@ export default function useRestaurants(
 		wheelchair,
 	]);
 
-	return restaurants;
+	return { restaurants, loading };
 }
