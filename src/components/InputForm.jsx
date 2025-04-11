@@ -14,6 +14,7 @@ export default function InputForm() {
 	const [kosher, setKosher] = useState('');
 	const [halal, setHalal] = useState('');
 	const [glutenfree, setGlutenfree] = useState('');
+	const [wheelchair, setWheelchair] = useState('');
 
 	const handleGeocode = async (e) => {
 		e.preventDefault();
@@ -54,7 +55,8 @@ export default function InputForm() {
 		vegetarian,
 		kosher,
 		halal,
-		glutenfree
+		glutenfree,
+		wheelchair
 	);
 	return (
 		<form onSubmit={handleGeocode}>
@@ -84,7 +86,15 @@ export default function InputForm() {
 				setCuisine={setCuisine}
 			/>
 
-			<div className="dietoptions">
+			<div className="wheelchairanddiet">
+				<label>
+					<input
+						type="checkbox"
+						checked={wheelchair}
+						onChange={(e) => setWheelchair(e.target.checked)}
+					/>
+					rollstuhlgerecht
+				</label>
 				<label>
 					<input
 						type="checkbox"

@@ -127,9 +127,10 @@ Hauptinhalt. */
 .only {
 	background-color: #4169e1;
 }
-.dietoptions {
-	margin-bottom: 10px;
+.wheelchairanddiet {
+	margin-block: 10px;
+	display: grid;
 }
-.dietoptions input {
+.wheelchairanddiet input {
 	margin-right: 10px;
 }

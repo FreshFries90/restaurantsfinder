@@ -10,7 +10,8 @@ export default function useRestaurants(
 	vegetarian,
 	kosher,
 	halal,
-	glutenfree
+	glutenfree,
+	wheelchair
 ) {
 	const [restaurants, setRestaurants] = useState([]);
 
@@ -27,13 +28,23 @@ export default function useRestaurants(
 		const glutenfreeFilter = glutenfree
 			? '["diet:gluten_free"~"^(yes|only)$"]'
 			: '';
+		const wheelchairFilter = wheelchair ? '["wheelchair"="yes"]' : '';
+		const filter = [
+			cuisineFilter,
+			veganFilter,
+			vegetarianFilter,
+			halalFilter,
+			kosherFilter,
+			glutenfreeFilter,
+			wheelchairFilter,
+		].join('');
 
 		const query = `
 			[out:json][timeout:25];
 				(
-					node["amenity"="restaurant"]${cuisineFilter}${veganFilter}${vegetarianFilter}${halalFilter}${kosherFilter}${glutenfreeFilter}(around:${radius},${latitude},${longitude});
-					way["amenity"="restaurant"]${cuisineFilter}${veganFilter}${vegetarianFilter}${halalFilter}${kosherFilter}${glutenfreeFilter}(around:${radius},${latitude},${longitude});
-					relation["amenity"="restaurant"]${cuisineFilter}${veganFilter}${vegetarianFilter}${halalFilter}${kosherFilter}${glutenfreeFilter}(around:${radius},${latitude},${longitude});
+					node["amenity"="restaurant"]${filter}(around:${radius},${latitude},${longitude});
+					way["amenity"="restaurant"]${filter}(around:${radius},${latitude},${longitude});
+					relation["amenity"="restaurant"]${filter}(around:${radius},${latitude},${longitude});
 				);
 			out center tags;
 		`;
@@ -68,6 +79,7 @@ export default function useRestaurants(
 		halal,
 		kosher,
 		glutenfree,
+		wheelchair,
 	]);
 
 	return restaurants;
