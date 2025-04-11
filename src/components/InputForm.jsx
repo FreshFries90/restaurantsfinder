@@ -9,6 +9,12 @@ export default function InputForm() {
 	const [coordinates, setCoordinates] = useState(null);
 	const [radius, setRadius] = useState(5000);
 	const [cuisine, setCuisine] = useState('');
+	const [vegetarian, setVegetarian] = useState('');
+	const [vegan, setVegan] = useState('');
+	const [kosher, setKosher] = useState('');
+	const [halal, setHalal] = useState('');
+	const [glutenfree, setGlutenfree] = useState('');
+
 	const handleGeocode = async (e) => {
 		e.preventDefault();
 		if (!address) return;
@@ -44,7 +50,11 @@ export default function InputForm() {
 		coordinates?.lat,
 		radius,
 		cuisine,
-		setCuisine
+		vegan,
+		vegetarian,
+		kosher,
+		halal,
+		glutenfree
 	);
 	return (
 		<form onSubmit={handleGeocode}>
@@ -61,6 +71,7 @@ export default function InputForm() {
 				value={radius}
 				onChange={(e) => setRadius(Number(e.target.value))}
 			>
+				<option value="1000">1 km</option>
 				<option value="2000">2 km</option>
 				<option value="5000">5 km</option>
 				<option value="10000">10 km</option>
@@ -73,14 +84,53 @@ export default function InputForm() {
 				setCuisine={setCuisine}
 			/>
 
+			<div className="dietoptions">
+				<label>
+					<input
+						type="checkbox"
+						checked={vegan}
+						onChange={(e) => setVegan(e.target.checked)}
+					/>
+					vegan
+				</label>
+				<label>
+					<input
+						type="checkbox"
+						checked={vegetarian}
+						onChange={(e) => setVegetarian(e.target.checked)}
+					/>
+					vegetarisch
+				</label>
+				<label>
+					<input
+						type="checkbox"
+						checked={glutenfree}
+						onChange={(e) => setGlutenfree(e.target.checked)}
+					/>
+					gluten-frei
+				</label>
+				<label>
+					<input
+						type="checkbox"
+						checked={halal}
+						onChange={(e) => setHalal(e.target.checked)}
+					/>
+					halal
+				</label>
+				<label>
+					<input
+						type="checkbox"
+						checked={kosher}
+						onChange={(e) => setKosher(e.target.checked)}
+					/>
+					kosher
+				</label>
+			</div>
 			<button type="submit">Suchen</button>
 
-			{coordinates?.lat &&
-				coordinates?.lon &&
-				restaurants &&
-				restaurants.length >= 1 && (
-					<p>{restaurants.length} Restaurants gefunden.</p>
-				)}
+			{coordinates?.lat && coordinates?.lon && restaurants && (
+				<p>{restaurants.length} Restaurants gefunden.</p>
+			)}
 			{coordinates?.lat && coordinates?.lon && restaurants && (
 				<RestaurantFinder restaurants={restaurants} />
 			)}

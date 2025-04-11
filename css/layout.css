@@ -127,3 +127,9 @@ Hauptinhalt. */
 .only {
 	background-color: #4169e1;
 }
+.dietoptions {
+	margin-bottom: 10px;
+}
+.dietoptions input {
+	margin-right: 10px;
+}

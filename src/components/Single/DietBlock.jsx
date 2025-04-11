@@ -3,6 +3,7 @@ export default function DietBlock({ tags }) {
 	const vegetarianValue = tags['diet:vegetarian'];
 	const kosherValue = tags['diet:kosher'];
 	const halalValue = tags['diet:halal'];
+	const glutenFreeValue = tags['diet:gluten_free'];
 	return (
 		<div className="diet">
 			{veganValue && (
@@ -31,6 +32,13 @@ export default function DietBlock({ tags }) {
 					className={`halal ${halalValue}`}
 					alt="Halal"
 					src="src/images/icons/halal.png"
+				></img>
+			)}
+			{glutenFreeValue && (
+				<img
+					className={`glutenfree ${glutenFreeValue}`}
+					alt="Halal"
+					src="src/images/icons/gluten-free.png"
 				></img>
 			)}
 		</div>

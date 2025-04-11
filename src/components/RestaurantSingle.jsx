@@ -20,7 +20,7 @@ export default function RestaurantSingle({ restaurant }) {
 		'contact:tiktok',
 	].some((key) => tags?.[key]);
 	const hasDietInfo = [
-		'diet:vegatarian',
+		'diet:vegetarian',
 		'diet:vegan',
 		'diet:kosher',
 		'diet:halal',
