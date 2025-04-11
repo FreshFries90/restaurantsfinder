@@ -49,10 +49,10 @@ export default function InputForm() {
 	useEffect(() => {
 		if (address.length >= 2) {
 			const timeout = setTimeout(() => {
-				handleGeocode({ preventDefault: () => {} }); // fake preventDefault
-			}, 500); // debounce: warte 500ms nach der letzten Eingabe
+				handleGeocode({ preventDefault: () => {} });
+			}, 500);
 
-			return () => clearTimeout(timeout); // cleanup bei neuer Eingabe
+			return () => clearTimeout(timeout);
 		}
 	}, [address]);
 
@@ -112,7 +112,7 @@ export default function InputForm() {
 				setKosher={setKosher}
 			/>
 
-			{loading && <div className="spinner">🔄 Wird geladen...</div>}
+			{loading && <div className="spinner">🔄 wird geladen...</div>}
 			{coordinates?.lat && coordinates?.lon && restaurants && !loading && (
 				<>
 					<p>{restaurants.length} Restaurants gefunden.</p>
