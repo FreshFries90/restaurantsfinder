@@ -170,6 +170,7 @@ const cuisineTranslations = {
 	eastern_european: 'Osteuropäisch',
 	macedonian: 'Mazedonisch',
 	anatolian: 'Anatolisch',
+	diner: 'Amerikanisches Diner',
 	'nepal, himalaya': 'Himalayanisch',
 	no: 'Keine Informationen vorhanden',
 	'seasonal regional dishes & selected meals with indian touch':

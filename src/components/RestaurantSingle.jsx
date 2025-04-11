@@ -24,6 +24,7 @@ export default function RestaurantSingle({ restaurant }) {
 		'diet:vegan',
 		'diet:kosher',
 		'diet:halal',
+		'diet:gluten_free',
 	].some((key) => tags?.[key]);
 	const wheelchairInfo = [
 		'wheelchair',

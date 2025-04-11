@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'redaxios';
 import useRestaurants from '../hooks/useRestaurants';
 import RestaurantFinder from './RestaurantFinder';
 import CuisineFilter from './Input/CuisineFilter';
+import OptionsFilter from './Input/OptionsFilter';
 
 export default function InputForm() {
 	const [address, setAddress] = useState('');
@@ -45,6 +46,15 @@ export default function InputForm() {
 			console.error('Geocoding-Fehler:', error);
 		}
 	};
+	useEffect(() => {
+		if (address.length >= 2) {
+			const timeout = setTimeout(() => {
+				handleGeocode({ preventDefault: () => {} }); // fake preventDefault
+			}, 500); // debounce: warte 500ms nach der letzten Eingabe
+
+			return () => clearTimeout(timeout); // cleanup bei neuer Eingabe
+		}
+	}, [address]);
 
 	const restaurants = useRestaurants(
 		coordinates?.lon,
@@ -58,6 +68,7 @@ export default function InputForm() {
 		glutenfree,
 		wheelchair
 	);
+
 	return (
 		<form onSubmit={handleGeocode}>
 			<input
@@ -86,63 +97,28 @@ export default function InputForm() {
 				setCuisine={setCuisine}
 			/>
 
-			<div className="wheelchairanddiet">
-				<label>
-					<input
-						type="checkbox"
-						checked={wheelchair}
-						onChange={(e) => setWheelchair(e.target.checked)}
-					/>
-					rollstuhlgerecht
-				</label>
-				<label>
-					<input
-						type="checkbox"
-						checked={vegan}
-						onChange={(e) => setVegan(e.target.checked)}
-					/>
-					vegan
-				</label>
-				<label>
-					<input
-						type="checkbox"
-						checked={vegetarian}
-						onChange={(e) => setVegetarian(e.target.checked)}
-					/>
-					vegetarisch
-				</label>
-				<label>
-					<input
-						type="checkbox"
-						checked={glutenfree}
-						onChange={(e) => setGlutenfree(e.target.checked)}
-					/>
-					gluten-frei
-				</label>
-				<label>
-					<input
-						type="checkbox"
-						checked={halal}
-						onChange={(e) => setHalal(e.target.checked)}
-					/>
-					halal
-				</label>
-				<label>
-					<input
-						type="checkbox"
-						checked={kosher}
-						onChange={(e) => setKosher(e.target.checked)}
-					/>
-					kosher
-				</label>
-			</div>
+			<OptionsFilter
+				wheelchair={wheelchair}
+				setWheelchair={setWheelchair}
+				vegan={vegan}
+				setVegan={setVegan}
+				vegetarian={vegetarian}
+				setVegetarian={setVegetarian}
+				glutenfree={glutenfree}
+				setGlutenfree={setGlutenfree}
+				halal={halal}
+				setHalal={setHalal}
+				kosher={kosher}
+				setKosher={setKosher}
+			/>
+
 			<button type="submit">Suchen</button>
 
 			{coordinates?.lat && coordinates?.lon && restaurants && (
-				<p>{restaurants.length} Restaurants gefunden.</p>
-			)}
-			{coordinates?.lat && coordinates?.lon && restaurants && (
-				<RestaurantFinder restaurants={restaurants} />
+				<>
+					<p>{restaurants.length} Restaurants gefunden.</p>
+					<RestaurantFinder restaurants={restaurants} />
+				</>
 			)}
 			{coordinates?.lat && coordinates?.lon && (
 				<p>
